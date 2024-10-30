@@ -18,9 +18,8 @@ export default function Page() {
         return (<Loading />)
     }
     return (
-        // <Suspense fallback={<div>Loading user information...</div>}>
-        //     <UserProfile />
-        // </Suspense>
-        <Loading />
+        <Suspense fallback={<div>Loading user information...</div>}>
+            <UserProfile />
+        </Suspense>
     )
 }
