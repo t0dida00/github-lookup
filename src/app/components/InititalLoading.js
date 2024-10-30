@@ -6,7 +6,7 @@ import TextScrambleFunc from '../utils/TextScramble';
 const GitHubIcon = () => {
     useEffect(() => {
         const anim = anime.timeline({
-            loop: true,
+            loop: false,
             direction: 'linear',
         });
 

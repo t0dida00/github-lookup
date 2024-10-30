@@ -1,11 +1,7 @@
 .container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    background-color: #0a192f;
+    animation: moveAndScale 1s ease-in-out forwards;
+    animation-delay: 3s;
+    position: absolute;
 }
 
 .wrapper {
@@ -30,4 +26,16 @@
     color: #fff;
     font-size: 40px;
 
+}
+
+@keyframes moveAndScale {
+    0% {
+        transform: scale(1);
+
+    }
+
+    100% {
+        transform: translateY(-30vh) scale(0.7);
+        // top: 0px;
+    }
 }
