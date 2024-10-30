@@ -1,6 +1,25 @@
+"use client"
 import Image from "next/image";
+import { useState, useEffect } from 'react';
+import InititalLoading from "./components/InititalLoading";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Set a timeout to change isLoading to false after 3 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3500); // 3000ms = 3 seconds
+
+    // Cleanup the timer when the component is unmounted
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    // Display a loading message or spinner while loading
+    return <InititalLoading />;
+  }
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
