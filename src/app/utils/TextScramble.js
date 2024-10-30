@@ -17,7 +17,7 @@ class TextScramble {
         for (let i = 0; i < length; i++) {
             const from = oldText[i] || '';
             const to = newText[i] || '';
-            const start = i * 20;  // Create a small delay for each character
+            const start = i * 10;  // Create a small delay for each character
             const end = start + Math.floor(Math.random() * 8); // Randomize the end
 
             this.queue.push({ from, to, start, end });
