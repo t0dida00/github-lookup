@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation';
+import Search from "./components/Search";
 
 // import InititalLoading from "./components/InititalLoading";
 const InititalLoading = dynamic(() => import('./components/InititalLoading'), { ssr: false })
@@ -30,12 +31,7 @@ export default function Home() {
   return (
     <div className={`min-h-screen flex flex-col gap-8 bg-[#0a192f] justify-center items-center relative `}>
       <InititalLoading />
-      <form onSubmit={handleSubmit}>
-        <div className={`search-container `}>
-          <input type="text" className="search-input" placeholder="Search..." value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-      </form>
-
+      <Search />
     </div>
   );
 }
