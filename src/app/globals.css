@@ -45,9 +45,9 @@ body {
   outline: none;
   opacity: 0;
   /* Start hidden */
-  transition: width 1s ease-in-out;
+  /* transition: width 0.5s ease-in-out; */
   animation: slideIn 0.8s ease forwards;
-  animation-delay: 3s;
+  animation-delay: 4s;
 }
 
 /* Input placeholder color */
