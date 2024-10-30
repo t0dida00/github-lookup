@@ -2,12 +2,16 @@
 import Image from "next/image";
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation';
 
 // import InititalLoading from "./components/InititalLoading";
 const InititalLoading = dynamic(() => import('./components/InititalLoading'), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [username, setUsername] = useState('');
+
+  const router = useRouter();
 
   useEffect(() => {
     // Set a timeout to change isLoading to false after 3 seconds
@@ -19,18 +23,19 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // if (isLoading) {
-  //   // Display a loading message or spinner while loading
-  //   return <InititalLoading />;
-  // }
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/user?id=${username}`);
+  };
   return (
     <div className={`min-h-screen flex flex-col gap-8 bg-[#0a192f] justify-center items-center relative `}>
       <InititalLoading />
+      <form onSubmit={handleSubmit}>
+        <div className={`search-container `}>
+          <input type="text" className="search-input" placeholder="Search..." value={username} onChange={(e) => setUsername(e.target.value)} />
+        </div>
+      </form>
 
-      <div className={`search-container `}>
-        <input type="text" className="search-input" placeholder="Search..." />
-      </div>
     </div>
   );
 }
