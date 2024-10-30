@@ -28,8 +28,8 @@ export default function Home() {
     <div className={`min-h-screen flex flex-col gap-8 bg-[#0a192f] justify-center items-center relative `}>
       <InititalLoading />
 
-      <div className={`text-white transition-opacity duration-500 ease-in-out ${isLoading ? "opacity-0" : "opacity-100"} `}>
-        text
+      <div className={`search-container ${isLoading ? "opacity-0" : "opacity-100"}`}>
+        <input type="text" className="search-input" placeholder="Search..." />
       </div>
     </div>
   );
