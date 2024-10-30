@@ -47,7 +47,7 @@ body {
   /* Start hidden */
   /* transition: width 0.5s ease-in-out; */
   animation: slideIn 0.8s ease forwards;
-  animation-delay: 4s;
+  animation-delay: 3.8s;
 }
 
 /* Input placeholder color */
