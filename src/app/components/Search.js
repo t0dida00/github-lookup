@@ -10,8 +10,10 @@ const Search = () => {
     const [loading, setLoading] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
-        // router.push(`/user?id=${username}`);
         setLoading(true)
+        setTimeout(() => {
+            router.push(`/user?id=${username}`);
+        }, 2000);
     };
 
 
