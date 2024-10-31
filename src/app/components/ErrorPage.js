@@ -6,7 +6,7 @@ const ErrorPage = () => {
             <div className={styles.cont_principal}>
 
                 <h1>Oops !!!</h1>
-                <p>The Page you're looking for isn't here.</p>
+                <p>The profile you're looking for isn't here.</p>
 
                 {/* <div className="styles.cont_aura_1"></div>
             <div className={styles.cont_aura_2}></div> */}

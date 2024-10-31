@@ -6,31 +6,76 @@
     align-items: center;
 }
 
-.cont_principal {}
+.cont_principal {
+    h1 {
+        font-weight: 400;
+        font-size: 150px;
+        color: #fff;
+        position: relative;
+        // left: -100%;
+        transition: all 0.5s;
+    }
 
-
-
-.cont_principal>h1 {
-    // font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 150px;
-    color: #fff;
-    position: relative;
-    // left: -100%;
-    transition: all 0.5s;
+    p {
+        font-weight: 300;
+        font-size: 24px;
+        letter-spacing: 5px;
+        color: #9294AE;
+        position: relative;
+        // left: 100%;
+        transition: all 0.5s;
+        transition-delay: 0.5s;
+        -webkit-transition: all 0.5s;
+        -webkit-transition-delay: 0.5s;
+    }
 }
 
+@media screen and (max-width:640px) {
+    .cont_principal {
+        h1 {
+            font-weight: 400;
+            font-size: 80px;
+            color: #fff;
+            // left: -100%;
+            transition: all 0.5s;
+        }
 
-.cont_principal>p {
-    // font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 24px;
-    letter-spacing: 5px;
-    color: #9294AE;
-    position: relative;
-    // left: 100%;
-    transition: all 0.5s;
-    transition-delay: 0.5s;
-    -webkit-transition: all 0.5s;
-    -webkit-transition-delay: 0.5s;
+        p {
+            font-weight: 300;
+            font-size: 14px;
+            color: #9294AE;
+            // left: 100%;
+            letter-spacing: 1px;
+            transition: all 0.5s;
+            transition-delay: 0.5s;
+            -webkit-transition: all 0.5s;
+            -webkit-transition-delay: 0.5s;
+        }
+    }
+
 }
+
+// .cont_principal>h1 {
+//     // font-family: 'Lato', sans-serif;
+//     font-weight: 400;
+//     font-size: 150px;
+//     color: #fff;
+//     position: relative;
+//     // left: -100%;
+//     transition: all 0.5s;
+// }
+
+
+// .cont_principal>p {
+//     // font-family: 'Lato', sans-serif;
+//     font-weight: 300;
+//     font-size: 24px;
+//     letter-spacing: 5px;
+//     color: #9294AE;
+//     position: relative;
+//     // left: 100%;
+//     transition: all 0.5s;
+//     transition-delay: 0.5s;
+//     -webkit-transition: all 0.5s;
+//     -webkit-transition-delay: 0.5s;
+// }
