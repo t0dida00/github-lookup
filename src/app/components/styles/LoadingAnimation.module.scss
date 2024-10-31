@@ -4,25 +4,29 @@ $delay: 1.2s;
     opacity: 0;
     animation: moveDown 0.8s ease forwards;
     animation-delay: 0.5s;
+    position: absolute;
+    width: 200px;
 }
 
 
-@media screen and (max-width: 320px) {
-    @keyframes moveDownSmall {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            transform: translateY(10vh);
-            opacity: 1;
-        }
-    }
-
+@media screen and (max-width: 640px) {
     .container {
         opacity: 0;
         animation: moveDownSmall 0.8s ease forwards;
         animation-delay: 0.5s;
+        bottom: 70px;
+    }
+
+    @keyframes moveDownSmall {
+        0% {
+            transform: translateY(-100%);
+        }
+
+        100% {
+            transform: translateY(-30%);
+            /* Start 20px below the final position */
+            opacity: 1;
+        }
     }
 }
 
