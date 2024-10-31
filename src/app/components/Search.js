@@ -15,8 +15,6 @@ const Search = () => {
             router.push(`/user/${username}`);
         }, 2000);
     };
-
-
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -25,7 +23,6 @@ const Search = () => {
                 </div>
             </form>
             {loading ? <Loading_v2 /> : null}
-
         </>
     )
 }

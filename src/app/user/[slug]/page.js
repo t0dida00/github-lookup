@@ -5,12 +5,12 @@ import Error from 'next/error';
 import { Octokit } from 'octokit';
 import { useRouter } from 'next/navigation';
 import ErrorPage from '@/app/components/ErrorPage';
+import UserInfo from '@/app/components/UserInfo';
 
 
 export default function Page({ params }) {
     const { slug } = use(params)
     const username = slug;
-    const [isLoading, setIsLoading] = useState(false)
     const [userData, setUserData] = useState(null);
     const [langData, setLangData] = useState(null);
     const [repoData, setRepoData] = useState(null);
@@ -56,7 +56,7 @@ export default function Page({ params }) {
 
     const getRepoData = async () => {
         try {
-            const response = await octokit.request('GET /users/{username}/repos', {
+            const response = await octokit.request(`GET /users/${username}/repos`, {
                 username: username,
                 per_page: 100,
                 headers: {
@@ -101,14 +101,23 @@ export default function Page({ params }) {
         getLangData();
         getRepoData();
     }, []);
-    console.log(userData)
     if (!userData && !error.active) return null
     if (error && error.active) {
         return <ErrorPage error={error} />
     }
     return (
-        <div>
-            {slug}
+        <div className='w-full flex justify-center'>
+            <div className='w-full flex  lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row '>
+                <div className='flex md:w-[40%]'>
+                    <UserInfo userData={userData} />
+                </div>
+                <div className='flex flex-col gap-4 md:w-[60%]'>
+                    <div>
+                        12321321
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }
