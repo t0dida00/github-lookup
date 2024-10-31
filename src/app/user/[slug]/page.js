@@ -14,7 +14,7 @@ export default function Page({ params }) {
     const [userData, setUserData] = useState(null);
     const [langData, setLangData] = useState(null);
     const [repoData, setRepoData] = useState(null);
-    const [error, setError] = useState({ active: false, type: 200 });
+    const [error, setError] = useState({ active: false, type: 200, message: "" });
     const [rateLimit, setRateLimit] = useState(null);
     const octokit = new Octokit({
         auth: process.env.NEXT_PUBLIC_OCTOKIT
@@ -30,13 +30,14 @@ export default function Page({ params }) {
                 }
             });
             setUserData(response.data)
+
         } catch (error) {
             if (error.status === 404) {
-                setError({ active: true, type: 404 });
+                setError({ active: true, type: 404, message: "UserData error" });
             } else if (error.status === 403) {
-                setError({ active: true, type: 403 });
+                setError({ active: true, type: 403, message: "UserData error" });
             } else {
-                setError({ active: true, type: 400 });
+                setError({ active: true, type: 400, message: "UserData error" });
             }
             // console.error('Error:', error);
         }
@@ -45,8 +46,9 @@ export default function Page({ params }) {
         const me = new GhPolyglot(`${username}`);
         me.userStats((err, stats) => {
             if (err) {
+
                 // console.error('Error:', err);
-                setError({ active: true, type: 400 });
+                setError({ active: true, type: 400, message: "LangData error" });
             }
             setLangData(stats);
         });
@@ -64,11 +66,14 @@ export default function Page({ params }) {
             setRepoData(response.data);
         } catch (error) {
             if (error.status === 404) {
-                setError({ active: true, type: 404 });
+                console.log(error)
+                setError({ active: true, type: 404, message: "ReportData error" });
             } else if (error.status === 403) {
-                setError({ active: true, type: 403 });
+                console.log(error)
+                setError({ active: true, type: 403, message: "ReportData error" });
             } else {
-                setError({ active: true, type: 200 });
+                console.log(error)
+                setError({ active: true, type: 200, message: "ReportData error" });
             }
         }
     };
@@ -87,6 +92,7 @@ export default function Page({ params }) {
                     setError({ active: true, type: 403 });
                 }
             } catch (error) {
+                console.log(error)
                 setError({ active: true, type: error.status || 500 });
             }
         }
@@ -95,9 +101,10 @@ export default function Page({ params }) {
         getLangData();
         getRepoData();
     }, []);
+    console.log(userData)
     if (!userData && !error.active) return null
     if (error && error.active) {
-        return <ErrorPage />
+        return <ErrorPage error={error} />
     }
     return (
         <div>
