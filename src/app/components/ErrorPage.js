@@ -7,7 +7,7 @@ const ErrorPage = ({ error }) => {
     const { type, message } = error
     const handleBack = (e) => {
         e.preventDefault();
-        router.push(`/}`);
+        router.push(`/`);
     }
     if (type == 404) {
         return (
