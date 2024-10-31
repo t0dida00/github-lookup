@@ -28,6 +28,29 @@
         -webkit-transition: all 0.5s;
         -webkit-transition-delay: 0.5s;
     }
+
+    .buttonBack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+
+        &>div {
+            padding: 10px;
+            background: #FFF;
+            border-radius: 16px;
+            color: #23232F;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.5s;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+
+    }
 }
 
 @media screen and (max-width:640px) {
