@@ -6,6 +6,7 @@ import { Octokit } from 'octokit';
 import { useRouter } from 'next/navigation';
 import ErrorPage from '@/app/components/ErrorPage';
 
+
 export default function Page({ params }) {
     const { slug } = use(params)
     const username = slug;
@@ -17,7 +18,9 @@ export default function Page({ params }) {
     const [rateLimit, setRateLimit] = useState(null);
     const octokit = new Octokit({
         auth: process.env.NEXT_PUBLIC_OCTOKIT
-    })
+    });
+
+
     const getUserData = async () => {
         try {
             const response = await octokit.request(`GET /users/${username}`, {
