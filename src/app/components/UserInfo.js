@@ -7,7 +7,7 @@ const UserInfo = ({ userData }) => {
     console.log("following", following)
     console.log("userData", userData)
     return (
-        <div className="flex p-4 flex-col w-full justify-center items-center">
+        <div className="flex p-4 flex-col w-full justify-center items-center md:justify-start lg:items-center">
             <div className="w-[150px] h-[150px] rounded-full bg-gray-800 border border-gray-600 overflow-hidden">
                 <a href={html_url} target="_blank">
                     <img className='w-full h-full object-cover' src={avatar_url} alt={login} />
@@ -23,7 +23,7 @@ const UserInfo = ({ userData }) => {
                     </span>
                 </div>
             </div>
-            <div className="flex w-full justify-center items-center flex-col md:p-4 lg:flex-row gap-4 mt-8 lg:mt-2">
+            <div className="flex w-full justify-center items-center flex-col  lg:flex-row gap-4 mt-8 lg:mt-4 ">
                 <div className="flex flex-col items-center justify-center w-full lg:w-[100px] h-[100px] rounded-lg bg-[#112240] hover:bg-gray-300 transition-colors duration-300 cursor-pointer">
                     <div className='text-[20px] text-bold'>{public_repos}</div>
                     <div className='text-[14px] text-slate-500'>Repositories</div>

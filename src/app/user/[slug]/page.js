@@ -6,6 +6,7 @@ import { Octokit } from 'octokit';
 import { useRouter } from 'next/navigation';
 import ErrorPage from '@/app/components/ErrorPage';
 import UserInfo from '@/app/components/UserInfo';
+import ReponsitoryCard from '@/app/components/ReponsitoryCard';
 
 
 export default function Page({ params }) {
@@ -63,7 +64,9 @@ export default function Page({ params }) {
                     'X-GitHub-Api-Version': '2022-11-28'
                 }
             });
-            setRepoData(response.data);
+            const sortedRepoData = response.data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+            setRepoData(sortedRepoData);
         } catch (error) {
             if (error.status === 404) {
                 console.log(error)
@@ -107,17 +110,23 @@ export default function Page({ params }) {
     }
     return (
         <div className='w-full flex justify-center'>
-            <div className='w-full flex  lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row '>
-                <div className='flex md:w-[40%]'>
+            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row '>
+                <div className='flex md:w-[30%]'>
                     <UserInfo userData={userData} />
                 </div>
-                <div className='flex flex-col gap-4 md:w-[60%]'>
+                <div className='flex flex-col gap-4 md:w-[70%]'>
+
                     <div>
-                        12321321
+                        <h2 className='text-2xl'>Repositories</h2>
+                        <div className='flex flex-col gap-6 lg:flex-row flex-wrap'>
+                            {repoData && repoData.map((repo) => (
+                                <ReponsitoryCard data={repo} key={repo.id} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
