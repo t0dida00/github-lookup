@@ -12,7 +12,7 @@ const Search = () => {
         e.preventDefault();
         setLoading(true)
         setTimeout(() => {
-            router.push(`/user?id=${username}`);
+            router.push(`/user/${username}`);
         }, 2000);
     };
 
