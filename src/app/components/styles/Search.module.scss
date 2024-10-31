@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0a192f;
+}
+
+/* Input field styling */
+.input {
+    width: 0;
+    /* Start with 0 width */
+    max-width: 300px;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    text-align: center;
+    /* Rounded corners */
+    background: #0a192f;
+    color: #ffffff;
+    outline: none;
+    opacity: 0;
+    /* Start hidden */
+    /* transition: width 0.5s ease-in-out; */
+    animation: slideIn 0.8s ease forwards;
+    animation-delay: 3.8s;
+}
+
+/* Input placeholder color */
+.input::placeholder {
+    color: #ccc;
+}
+
+/* Keyframes for slide-in effect */
+@keyframes slideIn {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+
+    100% {
+        width: 300px;
+        opacity: 1;
+    }
+}
+
+.slideOut {
+    animation: slide-out 1s forwards;
+    // animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slide-out {
+    from {
+        // transform: translateY(0);
+        width: 300px;
+        opacity: 1;
+    }
+
+    to {
+        // transform: translateY(-20px);
+        width: 0;
+        opacity: 0;
+    }
+}
