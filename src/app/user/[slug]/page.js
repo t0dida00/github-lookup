@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import ErrorPage from '@/app/components/ErrorPage';
 import UserInfo from '@/app/components/UserInfo';
 import ReponsitoryCard from '@/app/components/ReponsitoryCard';
+import RepoList from '@/app/components/RepoList';
 
 export default function Page({ params }) {
     const { slug } = use(params)
@@ -171,12 +172,6 @@ export default function Page({ params }) {
                                             >
                                                 Size
                                             </div>
-                                            {/* <div
-                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick({ title: 'Commits', value: 'commits' })}
-                                            >
-                                                Time Create
-                                            </div> */}
                                             <div
                                                 className="px-4 py-2  cursor-pointer hover:bg-slate-400"
                                                 onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_counts' }))}
@@ -195,12 +190,12 @@ export default function Page({ params }) {
 
                             </div>
                         </div>
-
-                        <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
+                        <RepoList data={repoData} octokit={octokit} />
+                        {/* <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
                             {repoData && repoData.map((repo) => (
                                 <ReponsitoryCard data={repo} key={repo.id} octokit={octokit} />
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
