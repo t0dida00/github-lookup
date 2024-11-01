@@ -6,33 +6,35 @@ const RepoList = (props) => {
     if (!data) return null
 
     const [visibleCount, setVisibleCount] = useState(6);
-    // const [newItems, setNewItems] = useState([]);
 
     const handleShowMore = () => {
         setVisibleCount((prevCount) => prevCount + 6);
-        // const nextItems = data.slice(visibleCount, visibleCount + 6);
-        // setNewItems(nextItems);
     };
     const handleShowLess = () => {
         setVisibleCount(6);
     };
-    // useEffect(() => {
-    //     if (newItems.length > 0) {
-    //         newItems.forEach((item, index) => {
-    //             setTimeout(() => {
-    //                 setVisibleCount((prev) => prev + 1); // Show one item at a time
-    //             }, index * 500); // 500 ms delay for each item
-    //         });
-    //     }
-    // }, [newItems]);
+
     const isShowMore = visibleCount < data.length;
     return (
         <>
 
             <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
-                {data && data.slice(0, visibleCount).map((repo, index) => (
-                    <ReponsitoryCard data={repo} key={repo.id} octokit={octokit} visible={index < visibleCount} />
-                ))}
+                {data && data.slice(0, visibleCount).map((repo, index) => {
+                    const delayTime = `${(index % 6) * 1 * 200}ms`; // Delay based on batch index
+                    console.log(delayTime)
+                    return (
+                        <ReponsitoryCard
+                            data={repo}
+                            key={repo.id}
+                            octokit={octokit}
+                            visible={index < visibleCount}
+                            style={{
+                                animationDelay: delayTime,
+                            }}
+                        />
+                    );
+                }
+                )}
 
             </div>
             <div className='mt-5 w-full flex justify-center relative group'>
