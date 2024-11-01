@@ -9,9 +9,14 @@ const RepoList = (props) => {
 
     const handleShowMore = () => {
         setVisibleCount((prevCount) => prevCount + 6);
+
     };
     const handleShowLess = () => {
         setVisibleCount(6);
+        window.scrollTo({
+            top: document.body.scrollHeight + 200,
+            behavior: 'smooth'
+        });
     };
 
     const isShowMore = visibleCount < data.length;
@@ -44,7 +49,7 @@ const RepoList = (props) => {
                 >
                     {isShowMore ? 'Show More' : 'Show Less'}
                 </button>
-                <span className=' group/button absolute bg-[#64ffda] py-2 px-4 rounded-md border border-[#64ffda] text-[#64ffda] z-0 hidden lg:block cursor-pointer'>
+                <span onClick={isShowMore ? handleShowMore : handleShowLess} className=' group/button absolute bg-[#64ffda] py-2 px-4 rounded-md border border-[#64ffda] text-[#64ffda] z-0 hidden lg:block cursor-pointer'>
                     {isShowMore ? 'Show More' : 'Show Less'}
                 </span>
             </div>

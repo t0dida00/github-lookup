@@ -6,11 +6,13 @@
     /* Start with an offset */
     animation: fadeInUp 0.2s ease forwards;
     /* Animation effect */
+    display: hidden;
 }
 
 @keyframes fadeInUp {
     to {
         opacity: 1;
+        // display: block;
         // transform: translateY(0);
         /* End at the original position */
     }
