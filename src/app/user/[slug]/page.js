@@ -110,7 +110,7 @@ export default function Page({ params }) {
     }
     return (
         <div className='w-full flex justify-center'>
-            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row '>
+            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row pb-20'>
                 <div className='flex md:w-[30%]'>
                     <UserInfo userData={userData} />
                 </div>
