@@ -1,9 +1,9 @@
 'use client'
 import { set } from 'animejs';
 import React, { useEffect, useState } from 'react';
-
+import styles from "./styles/ReponsitoryCard.module.scss";
 const ReponsitoryCard = (props) => {
-    const { data, octokit } = props;
+    const { data, octokit, style } = props;
     const { html_url, name, description, size, forks_count, topics, language, id, pushed_at } = data;
     const [commitCount, setCommitCount] = useState(null);
     const [lastCommit, setLastCommit] = useState(null);
@@ -48,9 +48,10 @@ const ReponsitoryCard = (props) => {
         getCommitCount();
     }, []);
     return (
-        <div key={id} className=' group group/list flex w-full overflow-hidden flex-col gap-2 md:w-[48%] lg:w-[31%] border border-gray-300 hover:bg-[#112240] box-shadow: 0 10px 30px -15px 
+
+        <div key={id} className={`${styles.fadeIn} group group/list flex w-full overflow-hidden flex-col gap-2 md:w-[48%] lg:w-[31%] border border-gray-300 hover:bg-[#112240] box-shadow: 0 10px 30px -15px 
         justify-between items-start flex-direction-column h-auto p-4 rounded-md transition lg:hover:transform lg:hover:translate-y-[-5px]
-        cursor-pointer relative lg:hover:!opacity-100 lg:group-hover/list:opacity-50'>
+        cursor-pointer relative lg:hover:!opacity-100  `} style={style}>
             <a href={html_url} target='_blank' rel='noopener noreferrer' className='group/card w-full before:block before:content-"" before:absolute before:z-10 before:w-full before:h-full before:top-0 before:left-0'>
                 <div className='text-[#ccd6f6] text-[22px] font-extrabold lg:group-hover/card:text-teal-300 flex flex-row justify-between w-full' >
                     <span>

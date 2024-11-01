@@ -1,0 +1,17 @@
+/* styles.css or your CSS file */
+.fadeIn {
+    opacity: 0;
+    /* Start hidden */
+    // transform: translateY(20px);
+    /* Start with an offset */
+    animation: fadeInUp 0.2s ease forwards;
+    /* Animation effect */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        // transform: translateY(0);
+        /* End at the original position */
+    }
+}
