@@ -1,12 +1,9 @@
 "use client";
 import { use, useEffect, useState } from 'react';
 import GhPolyglot from 'gh-polyglot';
-import Error from 'next/error';
 import { Octokit } from 'octokit';
-import { useRouter } from 'next/navigation';
 import ErrorPage from '@/app/components/ErrorPage';
 import UserInfo from '@/app/components/UserInfo';
-import ReponsitoryCard from '@/app/components/ReponsitoryCard';
 import RepoList from '@/app/components/RepoList';
 
 export default function Page({ params }) {

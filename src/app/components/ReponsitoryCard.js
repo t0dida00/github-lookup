@@ -69,7 +69,6 @@ const ReponsitoryCard = (props) => {
                 </div>
             </a>
             <div>
-
                 <p className='text-[15px] text-slate-200'>{description || "No description"}</p>
             </div>
             <div className=' w-full'>
@@ -86,9 +85,7 @@ const ReponsitoryCard = (props) => {
                     <div className='flex flex-row items-center gap-2'>
                         <div className='w-[10px] h-[10px] rounded-full border ' style={{ background: "#F7DF1E" }}></div>
                         <span key={language} className='mr-2 text-[13px]' >{language || "Unknown"}</span>
-
                     </div>
-
                     <div className='flex gap-2 opacity-50'>
                         <div className='mr-2 text-[12px]'>
                             <span>Commits:</span> {commitCount}
