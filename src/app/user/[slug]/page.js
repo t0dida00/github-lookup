@@ -8,7 +8,6 @@ import ErrorPage from '@/app/components/ErrorPage';
 import UserInfo from '@/app/components/UserInfo';
 import ReponsitoryCard from '@/app/components/ReponsitoryCard';
 
-
 export default function Page({ params }) {
     const { slug } = use(params)
     const username = slug;
@@ -21,7 +20,15 @@ export default function Page({ params }) {
         auth: process.env.NEXT_PUBLIC_OCTOKIT
     });
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState({ title: 'Recently', value: "updated_at" });
 
+    const toggleDropdown = () => setIsOpen(!isOpen);
+
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        setIsOpen(false);
+    };
     const getUserData = async () => {
         try {
             const response = await octokit.request(`GET /users/${username}`, {
@@ -44,11 +51,11 @@ export default function Page({ params }) {
         }
     };
     const getLangData = () => {
-        const me = new GhPolyglot(`${username}`);
+        const me = new GhPolyglot(`${username},${process.env.NEXT_PUBLIC_OCTOKIT}`);
         me.userStats((err, stats) => {
             if (err) {
-
-                // console.error('Error:', err);
+                console.log(err)
+                console.error('Error:', err);
                 setError({ active: true, type: 400, message: "LangData error" });
             }
             setLangData(stats);
@@ -91,6 +98,7 @@ export default function Page({ params }) {
                 });
                 const rateLimit = response.data.resources.core;
                 setRateLimit(rateLimit);
+                console.log(rateLimit)
                 if (rateLimit.remaining < 1) {
                     setError({ active: true, type: 403 });
                 }
@@ -101,26 +109,96 @@ export default function Page({ params }) {
         }
         fetchRateLimit();
         getUserData();
-        getLangData();
+        // getLangData();
         getRepoData();
     }, []);
+    useEffect(() => {
+        if (repoData) {
+            let sortedbyCriteria = ""
+            const { value } = selectedOption;
+            if (value === 'updated_at') {
+                sortedbyCriteria = [...repoData].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+            }
+            else {
+                sortedbyCriteria = [...repoData].sort((a, b) => a[value] - b[value]);
+
+            }
+            // console.log(sortedbyCriteria)
+            setRepoData(sortedbyCriteria);
+        }
+
+    }, [selectedOption]);
     if (!userData && !error.active) return null
     if (error && error.active) {
         return <ErrorPage error={error} />
     }
     return (
         <div className='w-full flex justify-center'>
-            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col md:flex-row pb-20'>
-                <div className='flex md:w-[30%]'>
+            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col  pb-20'>
+                <div className='flex '>
                     <UserInfo userData={userData} />
                 </div>
-                <div className='flex flex-col gap-4 md:w-[70%]'>
+                <div className='flex flex-col gap-4'>
 
                     <div>
-                        <h2 className='text-2xl'>Repositories</h2>
-                        <div className='flex flex-col gap-6 lg:flex-row flex-wrap'>
+                        <div className='mb-4 flex flex-col justify-center items-center md:justify-between  md:flex-row'>
+                            <h2 className='text-2xl font-bold'>Top repositories</h2>
+                            <div className="flex items-center gap-4 ">
+                                <label htmlFor="sort-by" className=" font-medium">
+                                    Sort by:
+                                </label>
+                                <div className="relative inline-block text-left w-[100px]">
+                                    <div
+                                        className="border  border-gray-300 bg-white text-gray-700 rounded-md px-2 py-1 cursor-pointer flex items-center justify-center"
+                                        onClick={toggleDropdown}
+                                    >
+                                        {selectedOption.title}
+                                        {/* <span className="ml-2">▼</span> */}
+                                    </div>
+
+                                    {isOpen && (
+                                        <div className="absolute mt-1 w-full bg-white border text-[#23232F] border-gray-300 rounded-md shadow-lg overflow-hidden z-50">
+                                            <div
+                                                className="px-4 py-2 cursor-pointer hover:bg-slate-400"
+                                                onClick={() => handleOptionClick({ title: 'Recently', value: 'updated_at' })}
+                                            >
+                                                Recently
+                                            </div>
+                                            <div
+                                                className="px-4 py-2 cursor-pointer hover:bg-slate-400"
+                                                onClick={() => handleOptionClick({ title: 'Size', value: 'size' })}
+                                            >
+                                                Size
+                                            </div>
+                                            {/* <div
+                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
+                                                onClick={() => handleOptionClick({ title: 'Commits', value: 'commits' })}
+                                            >
+                                                Time Create
+                                            </div> */}
+                                            <div
+                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
+                                                onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_counts' }))}
+                                            >
+                                                Forks
+                                            </div>
+                                            <div
+                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
+                                                onClick={() => handleOptionClick(({ title: 'Stars', value: 'stargazers_count' }))}
+                                            >
+                                                Stars
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
                             {repoData && repoData.map((repo) => (
-                                <ReponsitoryCard data={repo} key={repo.id} />
+                                <ReponsitoryCard data={repo} key={repo.id} octokit={octokit} />
                             ))}
                         </div>
                     </div>
