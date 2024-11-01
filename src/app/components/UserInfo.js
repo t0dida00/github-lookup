@@ -7,7 +7,7 @@ const UserInfo = ({ userData }) => {
     console.log("following", following)
     console.log("userData", userData)
     return (
-        <div className="flex p-4 flex-col w-full justify-center items-center md:justify-start lg:items-center">
+        <div className="flex pb-4 md:p-4 flex-col w-full justify-center items-center md:justify-start lg:items-center">
             <div className="w-[150px] h-[150px] rounded-full bg-gray-800 border border-gray-600 overflow-hidden">
                 <a href={html_url} target="_blank">
                     <img className='w-full h-full object-cover' src={avatar_url} alt={login} />
