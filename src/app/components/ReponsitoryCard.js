@@ -6,12 +6,10 @@ const ReponsitoryCard = (props) => {
     return (
         <div key={id} className='flex w-full overflow-hidden flex-col gap-2 lg:w-[48%] border bg-[#112240] box-shadow: 0 10px 30px -15px 
         justify-between items-start flex-direction-column h-auto p-4 rounded-md transition hover:transform hover:translate-y-[-5px]
-        cursor-pointer'>
-            <div>
-                <a href={html_url} target='_blank' rel='noopener noreferrer'>
-                    <div className='text-[#ccd6f6] text-[22px] font-extrabold'>{name}</div>
-                </a>
-            </div>
+        cursor-pointer relative'>
+            <a href={html_url} target='_blank' rel='noopener noreferrer' className='before:z-10 before:block before:content-"" before:absolute before:z-0 before:w-full before:h-full before:top-0 before:left-0'>
+                <div className='text-[#ccd6f6] text-[22px] font-extrabold'>{name}</div>
+            </a>
             <div>
 
                 <p className='text-[17px] text-slate-200'>{description}</p>

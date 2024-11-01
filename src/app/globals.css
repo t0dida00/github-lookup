@@ -21,4 +21,5 @@ body {
   background: var(--backgroundCustomer);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  position: relative;
 }
