@@ -22,20 +22,16 @@ const RepoList = (props) => {
     const isShowMore = visibleCount < data.length;
     return (
         <>
-
             <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
                 {data && data.slice(0, visibleCount).map((repo, index) => {
                     const delayTime = `${(index % 6) * 1 * 200}ms`; // Delay based on batch index
-                    console.log(delayTime)
+
                     return (
                         <ReponsitoryCard
                             data={repo}
                             key={repo.id}
                             octokit={octokit}
-                            visible={index < visibleCount}
-                            style={{
-                                animationDelay: delayTime,
-                            }}
+                            style={{ animationDelay: delayTime }}
                         />
                     );
                 }

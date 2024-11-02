@@ -5,6 +5,8 @@ import { Octokit } from 'octokit';
 import ErrorPage from '@/app/components/ErrorPage';
 import UserInfo from '@/app/components/UserInfo';
 import RepoList from '@/app/components/RepoList';
+import Loading_v2 from '@/app/components/Loading_v2';
+import Loading from '@/app/components/Loading';
 
 export default function Page({ params }) {
     const { slug } = use(params)
@@ -14,6 +16,8 @@ export default function Page({ params }) {
     const [repoData, setRepoData] = useState(null);
     const [error, setError] = useState({ active: false, type: 200, message: "" });
     const [rateLimit, setRateLimit] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     const octokit = new Octokit({
         auth: process.env.NEXT_PUBLIC_OCTOKIT
     });
@@ -112,6 +116,7 @@ export default function Page({ params }) {
     }, []);
     useEffect(() => {
         if (repoData) {
+            setLoading(true);  // Start loading before sorting
             let sortedbyCriteria = ""
             const { value } = selectedOption;
             if (value === 'updated_at') {
@@ -119,11 +124,17 @@ export default function Page({ params }) {
 
             }
             else {
-                sortedbyCriteria = [...repoData].sort((a, b) => a[value] - b[value]);
+                sortedbyCriteria = [...repoData].sort((a, b) => b.size - a.size);
 
             }
             // console.log(sortedbyCriteria)
             setRepoData(sortedbyCriteria);
+            const timeoutId = setTimeout(() => {
+                setLoading(false);  // End loading after delay
+            }, 1000);
+
+            // Clear timeout if the component unmounts or dependencies change
+            return () => clearTimeout(timeoutId);
         }
 
     }, [selectedOption]);
@@ -187,7 +198,13 @@ export default function Page({ params }) {
 
                             </div>
                         </div>
-                        <RepoList data={repoData} octokit={octokit} />
+                        {
+                            loading ?
+                                <div className='lg:h-[100px] flex justify-center items-center'>
+                                    <Loading />
+                                </div> : <RepoList data={repoData} octokit={octokit} />
+                        }
+
                         {/* <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
                             {repoData && repoData.map((repo) => (
                                 <ReponsitoryCard data={repo} key={repo.id} octokit={octokit} />
