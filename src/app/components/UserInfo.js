@@ -14,23 +14,23 @@ const UserInfo = ({ userData }) => {
                 <div className='text-[24px] font-bold '>t0dida00</div>
                 <div className='text-[14px] text-gray-500'> <span>
                     Joined on {new Date(created_at).toLocaleDateString()}
-                </span> <br></br> <span className='break-line'>
+                </span> <br></br> <span className='break-line' >
                         Last activated {new Date(updated_at).toLocaleDateString()}
                     </span>
                 </div>
             </div>
-            <div className="flex w-full justify-center items-center flex-row  lg:flex-row gap-4 mt-8 lg:mt-4 ">
-                <div className="flex flex-col items-center justify-center w-[100px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
+            <div className="flex w-full justify-center items-center flex-col sm:flex-row  lg:flex-row gap-4 mt-8 lg:mt-4 ">
+                <div className="flex flex-col items-center justify-center p-4 w-full sm:w-[150px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
                     <div className='text-[20px] text-bold'>{public_repos}</div>
-                    <div className='text-[14px] text-slate-500'>Repositories</div>
+                    <div className='text-[14px] text-slate-500 uppercase'>Repositories</div>
                 </div>
-                <div className="flex flex-col items-center justify-center w-[100px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
+                <div className="flex flex-col items-center justify-center p-4 w-full sm:w-[150px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
                     <div className='text-[20px] text-bold'>{followers}</div>
-                    <div className='text-[14px] text-slate-500'>Followers</div>
+                    <div className='text-[14px] text-slate-500 uppercase'>Followers</div>
                 </div>
-                <div className="flex flex-col items-center justify-center w-[100px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
+                <div className="flex flex-col items-center justify-center p-4 w-full sm:w-[150px] h-[100px] rounded-lg bg-[#112240] hover:bg-slate-700 transition-colors duration-300 cursor-pointer">
                     <div className='text-[20px] text-bold'>{following}</div>
-                    <div className='text-[14px] text-slate-500'>Following</div>
+                    <div className='text-[14px] text-slate-500 uppercase'>Following</div>
                 </div>
             </div>
         </div>

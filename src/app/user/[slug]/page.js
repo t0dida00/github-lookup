@@ -200,7 +200,7 @@ export default function Page({ params }) {
                         </div>
                         {
                             loading ?
-                                <div className='lg:h-[100px] flex justify-center items-center'>
+                                <div className=' h-[100px] flex justify-center items-center'>
                                     <Loading />
                                 </div> : <RepoList data={repoData} octokit={octokit} />
                         }
