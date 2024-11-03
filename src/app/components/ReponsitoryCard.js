@@ -53,7 +53,7 @@ const ReponsitoryCard = (props) => {
     }, []);
     return (
 
-        <div key={id} className={`${styles.fadeIn} group group/list flex w-full overflow-hidden flex-col gap-2 md:w-[48%] lg:w-[31%] border border-gray-300 hover:bg-[#112240] box-shadow: 0 10px 30px -15px 
+        <div key={id} className={`${styles.fadeIn} group group/card flex w-full overflow-hidden flex-col gap-2 md:w-[48%] lg:w-[31%] border border-gray-300 hover:bg-[#112240] box-shadow: 0 10px 30px -15px 
         justify-between items-start flex-direction-column h-auto p-4 rounded-md  lg:hover:transform lg:hover:translate-y-[-5px]
         cursor-pointer relative `} >
             <a href={html_url} target='_blank' rel='noopener noreferrer' className='w-full before:block before:content-"" before:absolute before:z-10 before:w-full before:h-full before:top-0 before:left-0'>
