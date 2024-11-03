@@ -22,7 +22,7 @@ const RepoList = (props) => {
     const isShowMore = visibleCount < data.length;
     return (
         <>
-            <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
+            <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-start'>
                 {data && data.slice(0, visibleCount).map((repo, index) => {
                     const delayTime = `${(index % 6) * 1 * 200}ms`; // Delay based on batch index
 
