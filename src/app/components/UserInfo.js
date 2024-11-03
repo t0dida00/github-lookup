@@ -11,7 +11,7 @@ const UserInfo = ({ userData }) => {
                 </a>
             </div>
             <div className='pt-4 text-center'>
-                <div className='text-[24px] font-bold '>t0dida00</div>
+                <div className='text-[24px] font-bold '>{login}</div>
                 <div className='text-[14px] text-gray-500'> <span>
                     Joined on {new Date(created_at).toLocaleDateString()}
                 </span> <br></br> <span className='break-line' >

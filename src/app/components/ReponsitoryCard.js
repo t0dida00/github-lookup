@@ -74,7 +74,7 @@ const ReponsitoryCard = (props) => {
             <div>
                 <p className='text-[15px] text-slate-200'>{description || "No description"}</p>
             </div>
-            <div className=' w-full'>
+            <div className=' w-full '>
                 <ul className='flex flex-wrap z-30'>
                     {topics.length > 0 && topics.map((topic) => (
                         <li key={topic} className="mr-1.5 mb-1.5">
@@ -101,7 +101,7 @@ const ReponsitoryCard = (props) => {
 
                 </div>
                 <div>
-                    <div className='text-[11px] flex flex-row justify-between mt-2 items-center '>
+                    <div className='text-[11px] flex flex-row justify-between mt-2 items-center gap-3'>
                         {/* <span className='opacity-35'>
                             Last Commits
                         </span>   */}

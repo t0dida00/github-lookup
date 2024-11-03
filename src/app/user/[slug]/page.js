@@ -7,6 +7,8 @@ import UserInfo from '@/app/components/UserInfo';
 import RepoList from '@/app/components/RepoList';
 import Loading_v2 from '@/app/components/Loading_v2';
 import Loading from '@/app/components/Loading';
+import Topics from '@/app/components/Topics';
+import Languages from '@/app/components/Languages';
 
 export default function Page({ params }) {
     const { slug } = use(params)
@@ -17,6 +19,8 @@ export default function Page({ params }) {
     const [error, setError] = useState({ active: false, type: 200, message: "" });
     const [rateLimit, setRateLimit] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [topics, setTopics] = useState([]);
+    const [languages, setLanguages] = useState([]);
 
     const octokit = new Octokit({
         auth: process.env.NEXT_PUBLIC_OCTOKIT
@@ -74,8 +78,26 @@ export default function Page({ params }) {
                 }
             });
             const sortedRepoData = response.data.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
-            console.log(sortedRepoData)
             setRepoData(sortedRepoData);
+
+            const topicsSet = new Set();
+            sortedRepoData.forEach(repo => {
+                if (repo.topics && repo.topics.length > 0) {
+                    repo.topics.forEach(topic => topicsSet.add(topic));
+                }
+            });
+            const uniqueTopics = Array.from(topicsSet);
+            setTopics(uniqueTopics);
+
+            const languageSet = new Set();
+            sortedRepoData.forEach(repo => {
+                if (repo.language) {
+                    languageSet.add(repo.language)
+                }
+            });
+            // Convert Set back to Array if needed
+            const uniqueLanguages = Array.from(languageSet);
+            setLanguages(uniqueLanguages)
         } catch (error) {
             if (error.status === 404) {
                 console.log(error)
@@ -125,6 +147,7 @@ export default function Page({ params }) {
                 } else if (value === 'size' || value === 'forks_count' || value === 'stargazers_count') {
                     return b[value] - a[value];
                 }
+
                 return 0; // No sorting if no valid criteria is selected
             });
             setRepoData(sortedbyCriteria);
@@ -142,15 +165,36 @@ export default function Page({ params }) {
         return <ErrorPage error={error} />
     }
     return (
-        <div className='w-full flex justify-center'>
-            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col  pb-20'>
+        <div className='w-full flex justify-center '>
+            <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col gap-5 pb-20'>
                 <div className='flex '>
                     <UserInfo userData={userData} />
                 </div>
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col lg:flex-row flex-wrap gap-6'>
+                    <div className='flex gap-2 flex-col items-center md:items-start lg:w-[48%] '>
+                        <h2 className='text-2xl font-bold'>Topics</h2>
+                        <div className='border w-full rounded-md p-4  h-full' >
+                            <div className='flex flex-wrap  gap-2'>
+                                {topics && topics.length > 0 && topics.map((tp, index) => <Topics topic={tp} key={index} />)}
+                            </div>
+                        </div>
 
+                    </div>
+                    <div className='flex gap-2 flex-col  items-center md:items-start lg:items-end lg:w-[48%]'>
+                        <h2 className='text-2xl font-bold'>Languages</h2>
+                        <div className='border w-full rounded-md p-4  h-full' >
+                            <div className='flex flex-wrap  gap-2'>
+
+
+                                {languages && languages.length > 0 && languages.map((lg, index) => <Languages language={lg} key={index} />)}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div className='flex flex-col gap-4'>
                     <div>
-                        <div className='mb-4 flex flex-col justify-center items-center md:justify-between  md:flex-row'>
+                        <div className='mb-4 flex flex-col justify-center items-center md:justify-between md:flex-row'>
                             <h2 className='text-2xl font-bold'>Top repositories</h2>
                             <div className="flex items-center gap-4 ">
                                 <label htmlFor="sort-by" className=" font-medium">
