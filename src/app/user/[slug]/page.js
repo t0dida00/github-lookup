@@ -73,8 +73,8 @@ export default function Page({ params }) {
                     'X-GitHub-Api-Version': '2022-11-28'
                 }
             });
-            const sortedRepoData = response.data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-
+            const sortedRepoData = response.data.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+            console.log(sortedRepoData)
             setRepoData(sortedRepoData);
         } catch (error) {
             if (error.status === 404) {
@@ -119,15 +119,14 @@ export default function Page({ params }) {
             setLoading(true);  // Start loading before sorting
             let sortedbyCriteria = ""
             const { value } = selectedOption;
-            if (value === 'updated_at') {
-                sortedbyCriteria = [...repoData].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-
-            }
-            else {
-                sortedbyCriteria = [...repoData].sort((a, b) => b.size - a.size);
-
-            }
-            // console.log(sortedbyCriteria)
+            sortedbyCriteria = [...repoData].sort((a, b) => {
+                if (value === 'updated_at') {
+                    return new Date(b.pushed_at) - new Date(a.pushed_at);
+                } else if (value === 'size' || value === 'forks_count' || value === 'stargazers_count') {
+                    return b[value] - a[value];
+                }
+                return 0; // No sorting if no valid criteria is selected
+            });
             setRepoData(sortedbyCriteria);
             const timeoutId = setTimeout(() => {
                 setLoading(false);  // End loading after delay
@@ -182,7 +181,7 @@ export default function Page({ params }) {
                                             </div>
                                             <div
                                                 className="px-4 py-2  cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_counts' }))}
+                                                onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_count' }))}
                                             >
                                                 Forks
                                             </div>

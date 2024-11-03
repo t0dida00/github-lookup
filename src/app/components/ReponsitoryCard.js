@@ -10,7 +10,6 @@ const ReponsitoryCard = (props) => {
     const [commitCount, setCommitCount] = useState(null);
     const [lastCommit, setLastCommit] = useState(null);
     const languageColor = colors[language];
-    console.log(languageColor)
     const getCommitCount = async () => {
         try {
             const response = await octokit.request(`GET /repos/${data.owner.login}/${name}/commits`, {
@@ -103,11 +102,11 @@ const ReponsitoryCard = (props) => {
                 </div>
                 <div>
                     <div className='text-[11px] flex flex-row justify-between mt-2 items-center '>
-                        <span className='opacity-35'>
+                        {/* <span className='opacity-35'>
                             Last Commits
-                        </span>  <span className='opacity-35'>
-                            {new Date(pushed_at).toLocaleDateString()} - {lastCommit}
-                        </span>
+                        </span>   */}
+                        <span >
+                            <span className='underline'>{new Date(pushed_at).toLocaleDateString()}</span>: {lastCommit}</span>
                         <div className='flex flex-row  gap-1'>
                             <div className='flex flex-row justify-center gap-1 items-baseline'>
                                 <div className='w-2 h-2 '>
@@ -127,7 +126,7 @@ const ReponsitoryCard = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
