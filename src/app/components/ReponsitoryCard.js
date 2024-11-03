@@ -2,11 +2,15 @@
 import { set } from 'animejs';
 import React, { useEffect, useState } from 'react';
 import styles from "./styles/ReponsitoryCard.module.scss";
+import colors from '../utils/colors';
+
 const ReponsitoryCard = (props) => {
     const { data, octokit, style } = props;
     const { html_url, name, description, size, forks_count, topics, language, id, pushed_at } = data;
     const [commitCount, setCommitCount] = useState(null);
     const [lastCommit, setLastCommit] = useState(null);
+    const languageColor = colors[language];
+    console.log(languageColor)
     const getCommitCount = async () => {
         try {
             const response = await octokit.request(`GET /repos/${data.owner.login}/${name}/commits`, {
@@ -83,7 +87,7 @@ const ReponsitoryCard = (props) => {
                 </ul>
                 <div className='flex flex-row justify-between items-center'>
                     <div className='flex flex-row items-center gap-2'>
-                        <div className='w-[10px] h-[10px] rounded-full border ' style={{ background: "#F7DF1E" }}></div>
+                        <div className='w-[10px] h-[10px] rounded-full border ' style={{ background: languageColor }}></div>
                         <span key={language} className='mr-2 text-[13px]' >{language || "Unknown"}</span>
                     </div>
                     <div className='flex gap-2 opacity-50'>

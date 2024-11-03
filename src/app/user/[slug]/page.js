@@ -204,12 +204,6 @@ export default function Page({ params }) {
                                     <Loading />
                                 </div> : <RepoList data={repoData} octokit={octokit} />
                         }
-
-                        {/* <div className='flex flex-col gap-6 md:flex-row flex-wrap group/list justify-between'>
-                            {repoData && repoData.map((repo) => (
-                                <ReponsitoryCard data={repo} key={repo.id} octokit={octokit} />
-                            ))}
-                        </div> */}
                     </div>
                 </div>
             </div>
