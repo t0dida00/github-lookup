@@ -16,12 +16,13 @@ export default function Page({ params }) {
     const [userData, setUserData] = useState(null);
     const [langData, setLangData] = useState(null);
     const [repoData, setRepoData] = useState(null);
+    const [filterData, setFilterData] = useState(null);
     const [error, setError] = useState({ active: false, type: 200, message: "" });
     const [rateLimit, setRateLimit] = useState(null);
     const [loading, setLoading] = useState(false);
     const [topics, setTopics] = useState([]);
     const [languages, setLanguages] = useState([]);
-
+    const [selections, setSelection] = useState([]);
     const octokit = new Octokit({
         auth: process.env.NEXT_PUBLIC_OCTOKIT
     });
@@ -137,29 +138,43 @@ export default function Page({ params }) {
         getRepoData();
     }, []);
     useEffect(() => {
-        if (repoData) {
-            setLoading(true);  // Start loading before sorting
-            let sortedbyCriteria = ""
-            const { value } = selectedOption;
-            sortedbyCriteria = [...repoData].sort((a, b) => {
-                if (value === 'updated_at') {
-                    return new Date(b.pushed_at) - new Date(a.pushed_at);
-                } else if (value === 'size' || value === 'forks_count' || value === 'stargazers_count') {
-                    return b[value] - a[value];
-                }
+        if (!repoData) return;  // Exit if repoData is not initialized
 
-                return 0; // No sorting if no valid criteria is selected
-            });
-            setRepoData(sortedbyCriteria);
-            const timeoutId = setTimeout(() => {
-                setLoading(false);  // End loading after delay
-            }, 1000);
+        setLoading(true);  // Start loading before sorting
+        let sortedbyCriteria = [...repoData];
 
-            // Clear timeout if the component unmounts or dependencies change
-            return () => clearTimeout(timeoutId);
+        const value = selectedOption?.value || 'updated_at';  // Fallback to a default sorting value
+
+        // Sort by selected option or default criterion
+        sortedbyCriteria.sort((a, b) => {
+            if (value === 'updated_at') {
+                return new Date(b.pushed_at) - new Date(a.pushed_at);
+            } else if (value === 'size' || value === 'forks_count' || value === 'stargazers_count') {
+                return b[value] - a[value];
+            }
+            return 0; // No sorting if no valid criteria is selected
+        });
+
+        // Filter by selections if selections array is not empty
+        if (selections.length > 0) {
+            sortedbyCriteria = sortedbyCriteria.filter(repo =>
+                selections.includes(repo.language) ||
+                repo.topics.some(topic => selections.includes(topic))
+            );
         }
 
-    }, [selectedOption]);
+        // Update repoData with sorted and filtered array
+        setFilterData(sortedbyCriteria);
+
+        // End loading with a delay
+        const timeoutId = setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+
+        // Clear timeout if component unmounts or dependencies change
+        return () => clearTimeout(timeoutId);
+
+    }, [selectedOption, selections]);
     if (!userData && !error.active) return null
     if (error && error.active) {
         return <ErrorPage error={error} />
@@ -170,12 +185,12 @@ export default function Page({ params }) {
                 <div className='flex '>
                     <UserInfo userData={userData} />
                 </div>
-                <div className='flex flex-col lg:flex-row flex-wrap gap-6'>
+                <div className='flex flex-col lg:flex-row flex-wrap gap-6 justify-between'>
                     <div className='flex gap-2 flex-col items-center md:items-start lg:w-[48%] '>
                         <h2 className='text-2xl font-bold'>Topics</h2>
                         <div className='border w-full rounded-md p-4  h-full' >
                             <div className='flex flex-wrap  gap-2'>
-                                {topics && topics.length > 0 && topics.map((tp, index) => <Topics topic={tp} key={index} />)}
+                                {topics && topics.length > 0 && topics.map((tp, index) => <Topics topic={tp} key={index} selections={selections} setSelection={setSelection} />)}
                             </div>
                         </div>
 
@@ -186,7 +201,7 @@ export default function Page({ params }) {
                             <div className='flex flex-wrap  gap-2'>
 
 
-                                {languages && languages.length > 0 && languages.map((lg, index) => <Languages language={lg} key={index} />)}
+                                {languages && languages.length > 0 && languages.map((lg, index) => <Languages language={lg} key={index} selections={selections} setSelection={setSelection} />)}
                             </div>
                         </div>
 
@@ -245,7 +260,7 @@ export default function Page({ params }) {
                             loading ?
                                 <div className=' h-[100px] flex justify-center items-center'>
                                     <Loading />
-                                </div> : <RepoList data={repoData} octokit={octokit} />
+                                </div> : <RepoList data={filterData || repoData} octokit={octokit} />
                         }
                     </div>
                 </div>
