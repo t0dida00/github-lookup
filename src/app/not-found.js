@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import styles from "./ErrorPage.module.scss"
+import styles from "./components/styles/ErrorPage.module.scss"
 import { useRouter } from 'next/navigation';
 
 const Custom404 = ({ error }) => {

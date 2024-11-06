@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '/styles/ErrorPage.module.scss'
+import styles from './styles/ErrorPage.module.scss'
 import { useRouter } from 'next/navigation';
 
 const ErrorPage = ({ error }) => {
