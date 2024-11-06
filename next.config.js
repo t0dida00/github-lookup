@@ -3,9 +3,9 @@
  */
 
 const nextConfig = {
-    experimental: {
-        missingSuspenseWithCSRBailout: false,
-    },
+    // experimental: {
+    //     missingSuspenseWithCSRBailout: false,
+    // },
 }
 
 module.exports = nextConfig

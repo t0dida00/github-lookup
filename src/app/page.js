@@ -9,8 +9,8 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen flex flex-col gap-8 bg-[#0a192f] justify-center items-center relative `}>
-      <InititalLoading suppressHydrationWarning />
-      <Search suppressHydrationWarning />
+      <InititalLoading />
+      <Search />
 
     </div>
   );
