@@ -196,89 +196,101 @@ export default function Page({ params }) {
                 <div className='flex '>
                     <UserInfo userData={userData} />
                 </div>
-                <div className='flex flex-col lg:flex-row flex-wrap gap-6 justify-between'>
-                    <div className='flex gap-2 flex-col items-center md:items-start lg:w-[48%] '>
-                        <h2 className='text-2xl font-bold'>Topics</h2>
-                        <div className='border w-full rounded-md p-4  h-full relative' >
-                            <div className='flex flex-wrap  gap-2'>
-                                {topics && topics.length > 0 && topics.map((tp, index) => <Topics topic={tp} key={index} selections={selections} setSelection={setSelection} />)}
-                            </div>
-                            <div className='absolute w-2 h-2 top-3 right-4 group/svg transform lg:hover:scale-150 cursor-pointer' onClick={() => handleClear('topics')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' className='lg:group-hover/svg:fill-[#64ffda]' d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" /></svg>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div className='flex gap-2 flex-col  items-center md:items-start lg:items-end lg:w-[48%]'>
-                        <h2 className='text-2xl font-bold'>Languages</h2>
-                        <div className='border w-full rounded-md p-4 h-full relative' >
-                            <div className='flex flex-wrap  gap-2'>
-                                {languages && languages.length > 0 && languages.map((lg, index) => <Languages language={lg} key={index} selections={selections} setSelection={setSelection} />)}
+                {repoData && repoData.length > 0 ? <>
+                    <div className='flex flex-col lg:flex-row flex-wrap gap-6 justify-between'>
+                        <div className='flex gap-2 flex-col items-center md:items-start lg:w-[48%] '>
+                            <h2 className='text-2xl font-bold'>Topics</h2>
+                            <div className='border w-full rounded-md p-4  h-full relative' >
+                                <div className='flex flex-wrap  gap-2'>
+                                    {topics && topics.length > 0 && topics.map((tp, index) => <Topics topic={tp} key={index} selections={selections} setSelection={setSelection} />)}
+                                </div>
+                                <div className='absolute w-2 h-2 top-3 right-4 group/svg transform lg:hover:scale-150 cursor-pointer' onClick={() => handleClear('topics')}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' className='lg:group-hover/svg:fill-[#64ffda]' d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" /></svg>
+                                </div>
                             </div>
-                            <div className='absolute w-2 h-2 top-3 right-4 group/svg transform lg:hover:scale-150 cursor-pointer' onClick={() => handleClear('languages')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' className='lg:group-hover/svg:fill-[#64ffda]' d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" /></svg>
-                            </div>
-                        </div>
 
+                        </div>
+                        <div className='flex gap-2 flex-col  items-center md:items-start lg:items-end lg:w-[48%]'>
+                            <h2 className='text-2xl font-bold'>Languages</h2>
+                            <div className='border w-full rounded-md p-4 h-full relative' >
+                                <div className='flex flex-wrap  gap-2'>
+                                    {languages && languages.length > 0 && languages.map((lg, index) => <Languages language={lg} key={index} selections={selections} setSelection={setSelection} />)}
+                                </div>
+                                <div className='absolute w-2 h-2 top-3 right-4 group/svg transform lg:hover:scale-150 cursor-pointer' onClick={() => handleClear('languages')}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' className='lg:group-hover/svg:fill-[#64ffda]' d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" /></svg>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div className='flex flex-col gap-4'>
-                    <div>
-                        <div className='mb-4 flex flex-col justify-center items-center md:justify-between md:flex-row'>
-                            <h2 className='text-2xl font-bold'>Top repositories</h2>
-                            <div className="flex items-center gap-4 ">
-                                <label htmlFor="sort-by" className=" font-medium">
-                                    Sort by:
-                                </label>
-                                <div className="relative inline-block text-left w-[100px]">
-                                    <div
-                                        className="border  border-gray-300 bg-white text-gray-700 rounded-md px-2 py-1 cursor-pointer flex items-center justify-center"
-                                        onClick={toggleDropdown}
-                                    >
-                                        {selectedOption.title}
-                                        {/* <span className="ml-2">▼</span> */}
+
+                    <div className='flex flex-col gap-4'>
+                        <div>
+                            <div className='mb-4 flex flex-col justify-center items-center md:justify-between md:flex-row'>
+                                <h2 className='text-2xl font-bold'>Top repositories</h2>
+                                <div className="flex items-center gap-4 ">
+                                    <label htmlFor="sort-by" className=" font-medium">
+                                        Sort by:
+                                    </label>
+                                    <div className="relative inline-block text-left w-[100px]">
+                                        <div
+                                            className="border  border-gray-300 bg-white text-gray-700 rounded-md px-2 py-1 cursor-pointer flex items-center justify-center"
+                                            onClick={toggleDropdown}
+                                        >
+                                            {selectedOption.title}
+                                            {/* <span className="ml-2">▼</span> */}
+                                        </div>
+
+                                        {isOpen && (
+                                            <div className="absolute mt-1 w-full bg-white border text-[#23232F] border-gray-300 rounded-md shadow-lg overflow-hidden z-50">
+                                                <div
+                                                    className="px-4 py-2 cursor-pointer hover:bg-slate-400"
+                                                    onClick={() => handleOptionClick({ title: 'Recently', value: 'updated_at' })}
+                                                >
+                                                    Recently
+                                                </div>
+                                                <div
+                                                    className="px-4 py-2 cursor-pointer hover:bg-slate-400"
+                                                    onClick={() => handleOptionClick({ title: 'Size', value: 'size' })}
+                                                >
+                                                    Size
+                                                </div>
+                                                <div
+                                                    className="px-4 py-2  cursor-pointer hover:bg-slate-400"
+                                                    onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_count' }))}
+                                                >
+                                                    Forks
+                                                </div>
+                                                <div
+                                                    className="px-4 py-2  cursor-pointer hover:bg-slate-400"
+                                                    onClick={() => handleOptionClick(({ title: 'Stars', value: 'stargazers_count' }))}
+                                                >
+                                                    Stars
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
 
-                                    {isOpen && (
-                                        <div className="absolute mt-1 w-full bg-white border text-[#23232F] border-gray-300 rounded-md shadow-lg overflow-hidden z-50">
-                                            <div
-                                                className="px-4 py-2 cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick({ title: 'Recently', value: 'updated_at' })}
-                                            >
-                                                Recently
-                                            </div>
-                                            <div
-                                                className="px-4 py-2 cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick({ title: 'Size', value: 'size' })}
-                                            >
-                                                Size
-                                            </div>
-                                            <div
-                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick(({ title: 'Forks', value: 'forks_count' }))}
-                                            >
-                                                Forks
-                                            </div>
-                                            <div
-                                                className="px-4 py-2  cursor-pointer hover:bg-slate-400"
-                                                onClick={() => handleOptionClick(({ title: 'Stars', value: 'stargazers_count' }))}
-                                            >
-                                                Stars
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
-
                             </div>
+                            {
+                                loading ?
+                                    <div className=' h-[100px] flex justify-center items-center'>
+                                        <Loading />
+                                    </div> : <RepoList data={filterData || repoData} octokit={octokit} />
+                            }
                         </div>
-                        {
-                            loading ?
-                                <div className=' h-[100px] flex justify-center items-center'>
-                                    <Loading />
-                                </div> : <RepoList data={filterData || repoData} octokit={octokit} />
-                        }
                     </div>
-                </div>
+                </> :
+
+                    <div className='w-full h-[300px] flex items-center justify-center'>
+                        <span className='text-lg font-semibold'>
+                            {userData?.login || 'This user'} has no activity yet.
+                        </span>
+                    </div>
+                }
+
             </div>
 
         </div >
