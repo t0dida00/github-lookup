@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import ContributionData from './ContributionData';
 
 const UserInfo = ({ userData }) => {
     const { avatar_url, login, followers, following, public_repos, created_at, updated_at, html_url } = userData;
+
     return (
         <div className="flex pb-4 md:p-4 flex-col w-full justify-center items-center md:justify-start lg:items-center">
             <div className="w-[150px] h-[150px] rounded-full bg-gray-800 border border-gray-600 overflow-hidden">
@@ -32,6 +34,9 @@ const UserInfo = ({ userData }) => {
                     <div className='text-[20px] text-bold'>{following}</div>
                     <div className='text-[14px] text-slate-500 uppercase'>Following</div>
                 </div>
+            </div>
+            <div className='w-full flex items-center justify-center mt-10 '>
+                <ContributionData />
             </div>
         </div>
     );

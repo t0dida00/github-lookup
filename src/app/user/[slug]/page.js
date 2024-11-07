@@ -9,6 +9,7 @@ import Loading_v2 from '@/app/components/Loading_v2';
 import Loading from '@/app/components/Loading';
 import Topics from '@/app/components/Topics';
 import Languages from '@/app/components/Languages';
+import { getCurrentTime } from '@/app/utils/timeFunc';
 
 export default function Page({ params }) {
     const { slug } = use(params)
@@ -191,7 +192,13 @@ export default function Page({ params }) {
         return <ErrorPage error={error} />
     }
     return (
-        <div className='w-full flex justify-center '>
+        <div className='w-full flex justify-center relative '>
+            <div className='absolute right-0'>
+                Last checked:{getCurrentTime()}
+
+
+            </div>
+
             <div className='w-full flex lg:w-[1280px] p-[20px] pt-[50px] md:pt-[100px] flex-col gap-5 pb-20'>
                 <div className='flex '>
                     <UserInfo userData={userData} />

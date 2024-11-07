@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import Search from "./components/Search";
 
 import InititalLoading from "./components/InititalLoading";
+import { useEffect, useState } from 'react';
 // const InititalLoading = dynamic(() => import('./components/InititalLoading'), { ssr: false })
 
 export default function Home() {
