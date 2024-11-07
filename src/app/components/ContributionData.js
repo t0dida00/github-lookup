@@ -5,7 +5,7 @@ const ContributionData = () => {
 
     return (
         <div className='w-full flex flex-col lg:flex-row gap-10'>
-            <img className='w-full lg:w-[70%] border rounded-md border-[#64ffda]' src={`https://github-contributions-api.deno.dev/t0dida00.svg?from=${selectedYear}-01-01&font-color=fff`} alt="t0dida00 Github chart" />
+            <img className='w-full lg:w-[70%] border rounded-md border-[#fff]' src={`https://github-contributions-api.deno.dev/t0dida00.svg?from=${selectedYear}-01-01&font-color=fff`} alt="t0dida00 Github chart" />
             <ul className='cursor-pointer flex flex-row lg:flex-col justify-center lg:justify-normal gap-20 lg:gap-0'>
                 <li
                     className={` ${selectedYear === 2024 ? 'text-[#64ffda]' : ''}`}
