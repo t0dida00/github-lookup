@@ -12,7 +12,7 @@
     "animejs": "^3.2.2",
     "axios": "^1.7.7",
     "gh-polyglot": "^2.3.3",
-    "next": "15.0.2",
+    "next": "15.0.7",
     "node-polyglot": "^2.6.0",
     "octokit": "^4.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
